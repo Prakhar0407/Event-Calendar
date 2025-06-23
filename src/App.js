@@ -69,7 +69,7 @@ const App = () => {
         <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>Next</button>
       </div>
 
-      {/* 🔍 Search Input */}
+      
       <div style={{ textAlign: 'center', margin: '1rem' }}>
         <input
           type="text"

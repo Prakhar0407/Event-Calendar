@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const recurrenceOptions = ['None', 'Daily', 'Weekly', 'Monthly'];
+const recurrenceOptions = ["None", "Daily", "Weekly", "Monthly"];
 
 const EventForm = ({ date, event, onSave, onCancel, onDelete }) => {
-  const [title, setTitle] = useState(event?.title || '');
-  const [time, setTime] = useState(event?.time || '12:00');
-  const [desc, setDesc] = useState(event?.desc || '');
-  const [recurrence, setRecurrence] = useState(event?.recurrence || 'None');
-  const [color, setColor] = useState(event?.color || '');
+  const [title, setTitle] = useState(event?.title || "");
+  const [time, setTime] = useState(event?.time || "12:00");
+  const [desc, setDesc] = useState(event?.desc || "");
+  const [recurrence, setRecurrence] = useState(event?.recurrence || "None");
+  const [color, setColor] = useState(event?.color || "");
 
   const handleSubmit = () => {
     const newEvent = {
@@ -24,13 +24,31 @@ const EventForm = ({ date, event, onSave, onCancel, onDelete }) => {
 
   return (
     <div className="event-form">
-      <input placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} />
-      <input type="time" value={time} onChange={e => setTime(e.target.value)} />
-      <textarea placeholder="Description" value={desc} onChange={e => setDesc(e.target.value)} />
-      <select value={recurrence} onChange={e => setRecurrence(e.target.value)}>
-        {recurrenceOptions.map(opt => <option key={opt}>{opt}</option>)}
+      <input
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <input
+        type="time"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+      />
+      <textarea
+        placeholder="Description"
+        value={desc}
+        onChange={(e) => setDesc(e.target.value)}
+      />
+      <select
+        value={recurrence}
+        onChange={(e) => setRecurrence(e.target.value)}
+      >
+        {recurrenceOptions.map((opt) => (
+          <option key={opt}>{opt}</option>
+        ))}
       </select>
-      <input type="color" value={color} onChange={e => setColor(e.target.value)} />
+      <input type="color" value={color} onChange={(e) => setColor(e.target.value)} />
+
 
       <div>
         <button onClick={handleSubmit}>Save</button>
@@ -42,4 +60,3 @@ const EventForm = ({ date, event, onSave, onCancel, onDelete }) => {
 };
 
 export default EventForm;
-
