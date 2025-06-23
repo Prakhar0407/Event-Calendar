@@ -23,7 +23,17 @@ const EventForm = ({ date, event, onSave, onCancel, onDelete }) => {
   };
 
   return (
-    <div className="event-form">
+    <div
+      className="event-form"
+      style={{
+        backgroundColor: event ? "#f5f5dc" : "#ffffff", // beige if editing
+        padding: "1rem",
+        borderRadius: "8px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        margin: "1rem auto",
+        maxWidth: "400px",
+      }}
+    >
       <input
         placeholder="Title"
         value={title}
@@ -47,10 +57,13 @@ const EventForm = ({ date, event, onSave, onCancel, onDelete }) => {
           <option key={opt}>{opt}</option>
         ))}
       </select>
-      <input type="color" value={color} onChange={(e) => setColor(e.target.value)} />
+      <input
+        type="color"
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+      />
 
-
-      <div>
+      <div style={{ marginTop: "1rem" }}>
         <button onClick={handleSubmit}>Save</button>
         {onDelete && <button onClick={() => onDelete(event.id)}>Delete</button>}
         <button onClick={onCancel}>Cancel</button>
