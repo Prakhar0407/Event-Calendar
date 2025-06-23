@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
-  eachDayOfInterval,
-  format,
-  addMonths,
-  subMonths,
-  isSameDay,
+  startOfMonth, endOfMonth, startOfWeek, endOfWeek,
+  eachDayOfInterval, format, addMonths, subMonths, isSameDay
 } from 'date-fns';
+
 import EventForm from './components/EventForm';
 import CalendarDay from './components/CalendarDay';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd'; // ✅ ADD THIS
 
 const App = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -31,7 +25,7 @@ const App = () => {
   }, [events]);
 
   const addEvent = (event) => {
-    setEvents([...events, { ...event, id: Date.now() }]);
+    setEvents([...events, event]);
     setSelectedDate(null);
   };
 
@@ -45,31 +39,31 @@ const App = () => {
     setEditingEvent(null);
   };
 
+  // ✅ DRAG EVENT ACROSS DATES
   const handleDragEnd = (result) => {
-    const { source, destination, draggableId } = result;
+    const { destination, draggableId } = result;
     if (!destination) return;
-  
+
     const draggedEvent = events.find((e) => e.id.toString() === draggableId);
     if (!draggedEvent) return;
-  
-    const newDate = new Date(destination.droppableId); 
+
+    const newDate = new Date(destination.droppableId);
     if (!newDate) return;
-  
+
     const updatedEvent = { ...draggedEvent, date: newDate };
     setEvents(events.map((e) => (e.id === draggedEvent.id ? updatedEvent : e)));
   };
-  
 
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Event Calendar</h1>
+
       <div style={{ textAlign: 'center' }}>
         <button onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>Previous</button>
         <strong style={{ margin: '0 1rem' }}>{format(currentMonth, 'MMMM yyyy')}</strong>
         <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>Next</button>
       </div>
 
-      
       <div style={{ textAlign: 'center', margin: '1rem' }}>
         <input
           type="text"
@@ -93,7 +87,6 @@ const App = () => {
               )}
               onAdd={() => setSelectedDate(day)}
               onEdit={setEditingEvent}
-              dayIndex={index}
             />
           ))}
         </div>
